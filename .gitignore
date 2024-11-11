@@ -31,3 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/main/resources/firebase/letseat-d7547-firebase-adminsdk-knhvl-31987972fa.json
