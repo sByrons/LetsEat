@@ -10,4 +10,6 @@ public class LetseatApplication {
 		SpringApplication.run(LetseatApplication.class, args);
 	}
 
+        
+        
 }

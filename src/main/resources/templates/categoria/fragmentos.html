@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Let's Eat</title>
+    </head>
+
+
+    <body>
+
+        <!--FRAGMENTO QUE SE USA PARA MOSTRAR UN LISTADO DE CATEGORIAS-->
+        <section th:fragment="listaCategoria" id="categoria">
+            <div class="text-center p-2" th:if="${categorias != null}">
+                <div class="container">
+                    <!-- Fila de tarjetas -->
+                    <div class="row">
+                        <div th:each="categoria, contador : ${categorias}" class="col-md-4 mb-4">
+                            <!-- Tarjeta -->
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" th:src="${categoria.rutaImagen}" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title" th:text="${categoria.tipo}"></h5>
+                                        <p class="card-text" th:text="${categoria.descripcion}"></p>
+                                        <a href="#" class="btn btn-primary">Ver Restaurantes</a>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+
+
+
+
+
+
+
+
+    </body>
+</html>
