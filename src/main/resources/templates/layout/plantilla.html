@@ -28,7 +28,7 @@
                                 <a class="nav-link active" aria-current="page" th:href="@{/categoria/lista}">Categorias</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" th:href="@{/restaurantes}">Restaurantes</a>
+                                <a class="nav-link" th:href="@{/restaurantes/lista}">Restaurantes</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" th:href="@{/nosotros}" aria-current="page">Nosotros</a>
@@ -47,16 +47,16 @@
                             </li>
 
                         </ul>
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                                <button class="btn btn-dark"  type="submit">Buscar</button>
+                        <form method="POST" th:action="@{/busqueda/consulta}" class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Buscar" th:value="${item}" th:name="item" required="true"/>
+                            <button class="btn btn-dark"  type="submit">Buscar</button>
                         </form>
                     </div>
                 </div>
             </nav>
 
         </header>
-        
+
         <footer th:fragment="footer" class="bg-dark text-white mt-5 p-1">
             <div class="container">
                 <div class="col">
@@ -68,6 +68,6 @@
         </footer>
 
     </body>
-    
-    
+
+
 </html>

@@ -9,26 +9,26 @@
 
     <body>
 
-        <!--FRAGMENTO QUE SE USA PARA MOSTRAR UN LISTADO DE CATEGORIAS-->
-        <section th:fragment="listaCategoria" id="categoria">
-            <div class="text-center p-2" th:if="${categorias != null}">
+        <!--FRAGMENTO QUE SE USA PARA MOSTRAR UN LISTADO DE RESTAURANTES-->
+        <section th:fragment="listaRestaurante" id="restaurante">
+            <div class="text-center p-2" th:if="${restaurantes != null}">
                 <div class="container">
                     <!-- Fila de tarjetas -->
                     <div class="row" >
-                        <div th:each="categoria, contador : ${categorias}" class="col-md-4 mb-4">
+                        <div th:each="restaurante, contador : ${restaurantes}" class="col-md-4 mb-4">
                             <!-- Tarjeta -->
                             <div class="card"  style="width: 20rem;">
-                                <img class="card-img-top" th:src="${categoria.rutaImagen}" alt="Card image cap" height="200">
+                                <img class="card-img-top" th:src="${restaurante.rutaImagen}" alt="Card image cap" height="200">
                                     <div class="card-body">
-                                        <h5 class="card-title" th:text="${categoria.tipo}"></h5>
-                                        <p class="card-text" th:text="${categoria.descripcion}"></p>
-                                        <a th:href="@{/restaurantes/lista/}+${categoria.idCategoria}" class="btn btn-primary">
+                                        <h5 class="card-title" th:text="${restaurante.nombre}"></h5>
+                                        <p class="card-text" th:text="${restaurante.descripcion}"></p>
+                                        <a th:href="@{/restaurantes/info/}+${restaurante.idRestaurante}" class="btn btn-primary">
                                             <i class="fa-solid fa-eye fa-fade"></i>Ver</a>
-                                        <a th:href="@{/categoria/modificar/}+${categoria.idCategoria}"
+                                        <a th:href="@{/restaurantes/modificar/}+${restaurante.idRestaurante}"
                                            class="btn btn-warning">
                                             <i class="fa-solid fa-pen-to-square fa-bounce"></i>Modificar</a>
 
-                                        <a th:href="@{/categoria/eliminar/}+${categoria.idCategoria}"
+                                        <a th:href="@{/restaurantes/eliminar/}+${restaurante.idRestaurante}"
                                            class="btn btn-danger">
                                             <i class="fa-solid fa-trash-can fa-beat"></i> Borrar</a>
 
@@ -41,18 +41,18 @@
             </div>
         </section>
 
-        <!--FRAGMENTO QUE SE USA PARA COLOCAR UN BOTON PARA  AGREGAR UNA CATEGORIA-->
+        <!--FRAGMENTO QUE SE USA PARA COLOCAR UN BOTON PARA  AGREGAR UN RESTAURANTE-->
         <section th:fragment="botonAgregar" class="py-2 mb-2 bg-white">
             <div class="container">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <div class="row">
-                        <div class="col-md-3">   
+                        <div class="col-md-12">   
                             <button 
                                 type="button" 
                                 class="btn btn-warning btn-block" 
                                 data-bs-toggle="modal" 
-                                data-bs-target="#agregarCategoria">
-                                Agregar categoria
+                                data-bs-target="#agregarRestaurante">
+                                Agregar restaurante
                             </button>
                         </div>
                     </div>
@@ -60,9 +60,9 @@
             </div>
         </section>
 
-        <!--FRAGMENTO QUE SE USA PARA AGREGAR UNA CATEGORIA-->
-        <section th:fragment="agregarCategoria">
-            <div id="agregarCategoria" 
+        <!--FRAGMENTO QUE SE USA PARA AGREGAR UN RESTAURANTE-->
+        <section th:fragment="agregarRestaurante">
+            <div id="agregarRestaurante" 
                  class="modal fade" 
                  tabindex="-1" 
                  aria-labelledby="exampleModalLabel" 
@@ -70,19 +70,33 @@
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
                         <div class="modal-header bg-warning text-white">
-                            <h5 class="modal-title">Agregar categoria</h5>
+                            <h5 class="modal-title">Agregar restaurante</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
-                        <form th:action="@{/categoria/guardar}" th:object="${categoria}"
+                        <form th:action="@{/restaurantes/guardar}" th:object="${restaurante}"
                               method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
+
                                 <div class="mb-3">
-                                    <label for="tipo">Tipo</label>
-                                    <input type="text" class="form-control" name="tipo" required="true"/>
+                                    <label for="categoria.idCategoria">Categoria</label>
+                                    <select name="categoria.idCategoria" class="form-select">
+                                        <option th:each="item : ${categorias}"
+                                                th:value="${item.idCategoria}"
+                                                th:text="${item.tipo}"></option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" class="form-control" name="nombre" required="true"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="descripcion">Descripcion</label>
                                     <input type="text" class="form-control" name="descripcion" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="direccion">Direccion</label>
+                                    <input type="text" class="form-control" name="direccion" required="true"/>
                                 </div>
                                 <div class="form-check form-switch">
                                     <label class="form-check-label " for="activo">Activo</label>
@@ -104,17 +118,17 @@
         </section>
 
 
-        <!-- 4 Fragmento que se utiliza en la página modifca.html -->
-        <section th:fragment="editarCategoria">
+        <!--  Fragmento que se utiliza en la página modifca.html -->
+        <section th:fragment="editarRestaurante">
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-12">
                     <form method="POST"
-                          th:action="@{/categoria/guardar}" 
-                          th:object="${categoria}"
+                          th:action="@{/restaurantes/guardar}" 
+                          th:object="${restaurante}"
                           class="was-validated"                          
                           enctype="multipart/form-data">
-                        <input type="hidden" name="idCategoria" th:field="*{idCategoria}"/>
+                        <input type="hidden" name="idRestaurante" th:field="*{idRestaurante}"/>
                         <input type="hidden" name="rutaImagen" th:field="*{rutaImagen}"/> <div id=details>
                             <div class="container">
                                 <div class="row">
@@ -125,15 +139,29 @@
                                             </div>
                                             <div class="card-body">
                                                 <div class="mb-3">
-                                                    <label for="descripcion">Tipo</label>
+                                                    <label for="categoria.idCategoria">Categoria</label>
+                                                    <select name="categoria.idCategoria" class="form-select">
+                                                        <option th:each="item : ${categorias}"
+                                                                th:value="${item.idCategoria}"
+                                                                th:text="${item.tipo}"></option>
+                                                    </select>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="nombre">Nombre</label>
                                                     <input type="text" class="form-control" 
-                                                           name="tipo" th:field="*{tipo}"
+                                                           name="nombre" th:field="*{nombre}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="descripcion">Descripcion</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="direccion">Direccion</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="direccion" th:field="*{direccion}"
                                                            required="true">
                                                 </div>
                                                 <div class="form-check form-switch">
@@ -148,34 +176,34 @@
                                                     <label for="imagen">Imagen</label>
                                                     <input class="form-control" type="file" name="imagenFile"
                                                            onchange="readURL(this);" />
-                                                    <img id="blah" th:src="@{${categoria.rutaImagen}}" alt="your image" height="200"/>
+                                                    <img id="blah" th:src="@{${restaurante.rutaImagen}}" alt="your image" height="200"/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <section th:replace="~{categoria/fragmentos :: botonesEditar}"/>
+                            <section th:replace="~{restaurante/fragmentos :: botonesEditar}"/>
                     </form>
                 </div>
             </div>
 
         </section>
 
-        <!-- 5 Fragmento que se utiliza en el fragmento anterior -->
+        <!--  Fragmento que se utiliza en el fragmento anterior -->
         <section th:fragment="botonesEditar">
             <div class="container py-4 mb-4 bg-white">
                 <div class="row">
 
                     <div class="col-md-4 d-grid">
-                        <a th:href="@{/categoria/lista}" class="btn btn-primary">
+                        <a th:href="@{/restaurantes/lista}" class="btn btn-primary">
                             <i class="fa-solid fa-arrow-left fa-bounce"></i> Atras
                         </a>
                     </div>
 
 
                     <div class="col-md-4 d-grid">
-                        <a th:href="@{/categoria/eliminar/}+${categoria.idCategoria}" class="btn btn-danger">
+                        <a th:href="@{/restaurantes/eliminar/}+${restaurante.idRestaurante}" class="btn btn-danger">
                             <i class="fa-solid fa-trash-can fa-beat"></i> Eliminar
                         </a>
                     </div>
