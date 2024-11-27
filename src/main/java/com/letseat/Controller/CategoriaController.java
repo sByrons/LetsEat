@@ -19,6 +19,7 @@ public class CategoriaController {
 
     @Autowired
     private CategoriaService categoriaService;
+   
     @Autowired
     private FirebaseStorageService firebaseStorageService;
 
