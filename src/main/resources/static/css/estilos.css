@@ -24,5 +24,10 @@
     transition: transform 0.5s ease-in-out; /* Efecto suave de transición */
 }
 
-
-
+Body{
+    
+    width: 800px;
+    margin: auto;
+    border: dotted;
+    
+}

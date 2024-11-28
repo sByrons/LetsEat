@@ -1,15 +1,23 @@
-<!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout/plantilla :: head">        
     </head>
     <body>
-        <div>ABOUTUS</div>
+        <header th:replace="layout/plantilla :: header" />
+        
+        <div>
+            <h1 id="tituloPrincipal" style="text-align:center">Bienvenidos</h1>
+        </div>
+        <p>"Somos un grupo de apasionados de la comida que busca compartir con usted los mejores rincones gastronómicos de la ciudad o pais. Con años de experiencia en la industria, hemos creado una página donde encontrarás recomendaciones honestas y detalladas para que cada comida sea una experiencia inolvidable."</p>
+        <br />
+        <h2 class="mt-5">Misión</h2>
+        <br />
+        <p> Nuestra misión es conectar a los amantes de la gastronomía con las mejores experiencias culinarias. 
+            A través de reseñas auténticas y recomendaciones personalizadas, ayudamos a los comensales a descubrir y disfrutar de la diversidad de restaurantes que el mundo tiene para ofrecer. </p>
+        <h2 class="mt-5">Visión</h2>
+        <br />
+        <p>Ser la plataforma líder en la búsqueda y recomendación de restaurantes, donde cada usuario pueda encontrar su próximo lugar favorito para comer.</p>
+        <br />
+        <footer th:replace="layout/plantilla :: footer" />
     </body>
 </html>
