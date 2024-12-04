@@ -47,7 +47,7 @@ public class ProjectConfig implements WebMvcConfigurer {
                         //PERMITIDOS PARA TODOS
                 .requestMatchers("/","/index","/errores/**","/error",
                         "/usuario/**","/categoria/**","/restaurantes/**",
-                        "/registro/**","/js/**","/webjars/**","/images/**","/css/estilos.css" ,"/busqueda/**") //"/imagenes/**","/css/estilos.css"
+                        "/registro/**","/js/**","/webjars/**","/images/**" ,"/busqueda/**") //"/imagenes/**","/css/estilos.css"
                         .permitAll()
                         
                         
