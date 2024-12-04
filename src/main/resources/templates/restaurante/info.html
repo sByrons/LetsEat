@@ -1,33 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="layout/plantilla :: head"></head>
+    <head th:replace="layout/plantilla :: head">
+    </head>
     <body>
         <header th:replace="layout/plantilla :: header"></header>
-        <h2  class="text-center bg-light p-2 rounded shadow fw-bold text-danger">[[${restaurante.nombre}]]</h2>
+        <h2 class="text-center bg-light p-2 rounded shadow">[[${restaurante.nombre}]]</h2>
 
-        <div class="image-container">
-            <img class="img-fluid" th:src="${restaurante.rutaImagen}" alt="Imagen del restaurante">
-        </div>
-       
-            <div class="card-body">
-                <p class="fw-normal" th:text="${restaurante.descripcion}"></p>
-                <p>Lorem ipsum dolor sit amet consectetur adipiscing, elit quis fusce elementum tincidunt, 
-                   suspendisse fermentum sociosqu dictum ridiculus. Auctor mi varius conubia at cum id scelerisque, bibendum penatibus facilisis 
-                   inceptos faucibus eros, laoreet hendrerit ut pulvinar phasellus consequat. Parturient scelerisque gravida vehicula cum augue 
-                   curae aptent risus est nostra odio nulla vulputate, senectus iaculis dictumst tincidunt fermentum volutpat himenaeos interdum 
-                   diam maecenas sociis quam eros nisl, eleifend donec montes conubia tempus nibh tortor eu inceptos neque ultricies vivamus. 
-                   Etiam metus auctor bibendum eget orci cum congue iaculis fermentum magna fusce mus, facilisi rhoncus dui curae pharetra mi 
-                   morbi tortor dignissim donec duis, venenatis inceptos primis semper sagittis dis ornare turpis dapibus egestas habitant</p>
-                <div>
-                    <h5>Dirección</h5>
-                <iframe th:src="${restaurante.direccion}"></iframe>
+        <div class="container">
+            <img class="img-fluid" th:src="${restaurante.rutaImagen}" alt="Imagen del restaurante" height="200">
+                <div class="pt-3">
+                    <h5 class="fw-bold" th:text="${restaurante.nombre}"></h5>
+                    <p class="text-muted" th:text="${restaurante.descripcion}"></p>
+                    <p class="text-muted" th:text="${restaurante.direccion}"></p>
                 </div>
-            </div>
-        
-        
-
-
+        </div>
 
 
         <footer th:replace="layout/plantilla :: footer"></footer>
