@@ -30,7 +30,7 @@ public class RegistroServiceImpl implements RegistroService {
     @Autowired
     private UsuarioService usuarioService;
     @Autowired
-    private MessageSource messageSource;  //creado en semana 4...
+    private MessageSource messageSource; 
     @Autowired
     private FirebaseStorageServiceImpl firebaseStorageService;
 
@@ -159,7 +159,7 @@ public class RegistroServiceImpl implements RegistroService {
         return clave;
     }
 
-    //Ojo cómo le lee una informacion del application.properties
+   
     @Value("${servidor.http}")
     private String servidor;
 

@@ -8,7 +8,7 @@
     border-radius: 10px; /* Bordes redondeados opcionales */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras suaves para darle un toque elegante */
 }
-
+ 
 /* Aseguramos que la imagen se ajuste al tamaño del contenedor */
 .img-fluid {
     width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
@@ -17,17 +17,15 @@
     display: block; /* Elimina los espacios debajo de la imagen */
     border-radius: 10px; /* Bordes redondeados para la imagen */
 }
-
+ 
 /* Agregamos un efecto de hover si deseas resaltar la imagen cuando el usuario pase el cursor */
 .image-container:hover .img-fluid {
     transform: scale(1.15); /* Aumenta ligeramente el tamaño de la imagen */
     transition: transform 0.5s ease-in-out; /* Efecto suave de transición */
 }
-
+ 
 Body{
-    
     width: 800px;
     margin: auto;
     border: dotted;
-    
 }

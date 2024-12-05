@@ -72,7 +72,7 @@
                             </li>                            
                         </ul>
                     </div>
-<form method="POST" th:action="@{/busqueda/consulta}" class="d-flex">
+<form method="POST" th:action="@{/busqueda/consulta}" class="d-flex"sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
                             <input class="form-control me-2" type="search" placeholder="Buscar" th:value="${item}" th:name="item" required="true"/>
                             <button class="btn btn-dark"  type="submit" >Buscar</button>
                         </form>
