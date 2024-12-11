@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout/plantilla :: head">        
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"></header>
+
+        <div class="container my-5" >
+            <!-- Título Principal -->
+            <div class="text-center mb-4">
+                <h1 id="tituloPrincipal">Bienvenidos</h1>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header "style ="background-color: #07dbb8;">
+                    Sobre Nosotros
+                </div>
+                <div class="card-body card-body-custom">
+                    <p class="mb-0">
+                        "Somos un grupo de apasionados de la comida que busca compartir con usted los mejores rincones gastronómicos 
+                        de la ciudad o país. Con años de experiencia en la industria, hemos creado una página donde encontrarás 
+                        recomendaciones honestas y detalladas para que cada comida sea una experiencia inolvidable."
+                    </p>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header "style ="background-color: #07dbb8;">
+                    Misión
+                </div>
+                <div class="card-body card-body-custom">
+                    <p class="mb-0">
+                        Nuestra misión es conectar a los amantes de la gastronomía con las mejores experiencias culinarias. 
+                        A través de reseñas auténticas y recomendaciones personalizadas, ayudamos a los comensales a descubrir 
+                        y disfrutar de la diversidad de restaurantes que el mundo tiene para ofrecer.
+                    </p>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header "style ="background-color: #07dbb8;">
+                    Visión
+                </div>
+                <div class="card-body card-body-custom">
+                    <p class="mb-0">
+                        Ser la plataforma líder en la búsqueda y recomendación de restaurantes, donde cada usuario pueda encontrar 
+                        su próximo lugar favorito para comer.
+                    </p>
+                </div>
+            </div>
+             </div>
+            <footer th:replace="layout/plantilla :: footer"></footer>
+       
+    </body>
+</html>

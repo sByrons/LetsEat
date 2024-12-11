@@ -1,10 +1,14 @@
 package com.letseat.Controller;
 
 import com.letseat.domain.Categoria;
+import com.letseat.domain.Reseña;
 import com.letseat.domain.Restaurante;
+import com.letseat.domain.Usuario;
 import com.letseat.service.CategoriaService;
 import com.letseat.service.FirebaseStorageService;
+import com.letseat.service.ReseñaService;
 import com.letseat.service.RestauranteService;
+import com.letseat.service.UsuarioService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +32,11 @@ public class RestauranteController {
 
     @Autowired
     private FirebaseStorageService firebaseStorageService;
+    
+    @Autowired
+    private ReseñaService reseñaService;
+    @Autowired
+    private UsuarioService usuarioService;
 
     @GetMapping("/lista")
     public String mostrarRestaurante(Model model) {
@@ -49,16 +58,32 @@ public class RestauranteController {
     }
 
     @GetMapping("/info/{idRestaurante}")
-    public String mostrarRestaurante(Restaurante restaurante, Model model) {
+    public String mostrarRestaurante(@PathVariable("idRestaurante") long idRestaurante, Restaurante restaurante, Model model) {
+
+        restaurante = restauranteService.obtenerRestaurantePorId(idRestaurante);
+        Usuario usuarioActual = usuarioService.obtenerUsuarioPorId(1L);
+        List<Reseña> reseñas = reseñaService.obtenerReseñasPorRestaurante(idRestaurante);
+
+        model.addAttribute("restaurante", restaurante);
+        model.addAttribute("reseñas", reseñas);
 
         restaurante = restauranteService.getRestaurante(restaurante);
-        List<Categoria> categorias = categoriaService.getCategorias(true);
+        List<Categoria> categorias = categoriaService.getCategorias(false);
         model.addAttribute("restaurante", restaurante);
         model.addAttribute("categorias", categorias);
         return "/restaurante/info";
-        
     }
 
+//    @GetMapping("/info/{idRestaurante}")
+//    public String mostrarRestaurante(Restaurante restaurante, Model model) {
+//
+//        restaurante = restauranteService.getRestaurante(restaurante);
+//        List<Categoria> categorias = categoriaService.getCategorias(true);
+//        model.addAttribute("restaurante", restaurante);
+//        model.addAttribute("categorias", categorias);
+//        return "/restaurante/info";
+//        
+//    }
     @PostMapping("/guardar")
     public String restauranteGuardar(Restaurante restaurante,
             @RequestParam("imagenFile") MultipartFile imagenFile) {

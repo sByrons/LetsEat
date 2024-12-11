@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-    
     <head th:replace="layout/plantilla :: head">
      </head>
     <body>
         <header th:replace="layout/plantilla :: header"></header>
-        <h2 class="text-center bg-light p-2 rounded shadow">Categorías</h2>
+        <h2 class="text-center bg-light p-2 rounded shadow">Usuarios</h2>
         
-        <section th:replace="categoria/fragmentos :: botonAgregar"/>
-        <section th:replace="categoria/fragmentos :: agregarCategoria"/>
-        <section th:replace="categoria/fragmentos :: listaCategoria"/>
-        
+        <section th:replace="usuario/fragmentos :: editarUsuario"/>  
         
         <footer th:replace="layout/plantilla :: footer"></footer>
     </body>

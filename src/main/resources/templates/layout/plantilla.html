@@ -39,10 +39,32 @@
                                     Usuario
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Perfil</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="dropdown-item" th:href="@{/usuario/listado}">Lista de usuarios</a></li>
+                                    <li sec:authorize="hasRole('ROLE_USER')"><a class="dropdown-item" href="#">Perfil</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#">Cerrar sesion</a></li>
+
+                                    <ul class="navbar-nav" sec:authorize="!isAuthenticated()">
+                                        <li class="nav-item px-2">
+                                            <a class="nav-menu-link nav-link" th:href="@{/login}">
+                                                <i class='fas fa-sign-in-alt'></i> Ingresar
+                                            </a>
+                                        </li>                            
+                                    </ul>
+                                    <ul class="navbar-nav" sec:authorize="isAuthenticated()">
+                                        <li class="nav-item text-dark my-auto">
+                                            <img th:src="@{${session.usuarioImagen}}" alt="your image" height="40" class="rounded-circle"/>
+                                            <span sec:authentication='name'>Santi</span>
+                                        </li>
+
+                                        <li class="nav-item my-auto">
+                                            <form method="post" th:action="@{/logout}">
+                                                <button class="btn btn-dark">
+                                                    <i class="fas fa-sign-out-alt"></i>Salir
+                                                </button>
+                                            </form>
+                                        </li>                            
+                                    </ul>
+
                                 </ul>
                             </li>
 

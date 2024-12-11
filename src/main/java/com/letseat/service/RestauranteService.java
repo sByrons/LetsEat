@@ -29,4 +29,7 @@ public interface RestauranteService {
     //Busqueda por descripcion
     public List<Restaurante> buscarRestaurante(String item, String item2);
     
+    Restaurante obtenerRestaurantePorId(long idRestaurante);
+    
+    
 }
