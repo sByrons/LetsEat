@@ -236,8 +236,8 @@
 
                             <!-- Campos ocultos para el ID del restaurante y usuario -->
 
-                            <input type="text" name="idUsuario" th:value="${session.idUsuario}" />
-                            <input type="text" name="idRestaurante" th:value="${restaurante.idRestaurante}" />
+                            <input type="hidden" name="idUsuario" th:value="${session.idUsuario}" />
+                            <input type="hidden" name="idRestaurante" th:value="${restaurante.idRestaurante}" />
 
                             <div class="modal-body">
                                 <!-- Campo para el comentario -->
@@ -294,7 +294,7 @@
                                             <td th:text="${contador.count}">1</td> <!-- Muestra el contador (número de reseña) -->
                                             <td th:text="${reseña.usuario.nombre}">Nombre del usuario</td> <!-- Usuario nombre -->
                                             <td th:text="${reseña.comentario}">Comentario</td> <!-- Comentario -->
-                                            <td th:text="${reseña.valoracion}">Valoración</td> <!-- Valoración -->
+                                            <td th:text="${reseña.valoracion} +' Estrellas'">Valoración</td> <!-- Valoración -->
 
                                             <!--                                            <td>
                                                                                              Enlace para eliminar reseña 
