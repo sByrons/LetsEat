@@ -6,14 +6,11 @@ import com.letseat.domain.Usuario;
 import com.letseat.service.ReseñaService;
 import com.letseat.service.RestauranteService;
 import com.letseat.service.UsuarioService;
-import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/reseña")
@@ -21,64 +18,30 @@ public class ReseñaController {
 
     @Autowired
     private ReseñaService reseñaService;
+
+    @Autowired
     private RestauranteService restauranteService;
+
+    @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/listado")
-    public String inicio(Model model) {
-        var reseña = reseñaService.getReseñas(false);
-        model.addAttribute("reseña", reseña);
-        model.addAttribute("totalReseñas", reseña.size());
-        return "/reseña/listado";
-    }
-
-    @GetMapping("/nuevo")
-    public String reseñaNuevo(Reseña reseña) {
-        return "/reseña/modifica";
-    }
-
     @PostMapping("/guardar")
-    public String reseñaGuardar(Reseña reseña) {
-        reseñaService.save(reseña);
-        return "redirect:/restaurante/info";
-    }
+    public String reseñaGuardar(@RequestParam("comentario") String comentario,
+                                 @RequestParam("valoracion") int valoracion,
+                                 @RequestParam("idRestaurante") long idRestaurante,
+                                 @RequestParam("idUsuario") long idUsuario) {
 
-    @GetMapping("/eliminar/{idReseña}")
-    public String reseñaEliminar(Reseña reseña) {
-        reseñaService.delete(reseña);
-        return "redirect:/reseña/listado";
-    }
-
-    @GetMapping("/modificar/{idReseña}")
-    public String reseñaModificar(Reseña reseña, Model model) {
-        reseña = reseñaService.getReseña(reseña);
-        model.addAttribute("reseña", reseña);
-        return "/reseña/modifica";
-
-    }
-
-    @PostMapping("/reseñas/agregar")
-    public String agregarReseña(
-            @RequestParam("idRestaurante") Long idRestaurante,
-            @RequestParam("comentario") String comentario,
-            @RequestParam("calificacion") int valoracion,
-            Principal principal // Asegúrate de inyectar Principal para obtener el nombre del usuario autenticado
-    ) {
-        // Obtener el restaurante
+        // Obtener las instancias de Restaurante y Usuario
         Restaurante restaurante = restauranteService.obtenerRestaurantePorId(idRestaurante);
+        Usuario usuario = usuarioService.obtenerUsuarioPorId(idUsuario);
 
-//        // Obtener el usuario autenticado
-//        Usuario usuario = usuarioService.obtenerUsuarioPorEmail(principal.getName());
+        // Crear la reseña con los datos recibidos
+        Reseña reseña = new Reseña(comentario, valoracion, restaurante, usuario);
 
-        // Crear y guardar la nueva reseña
-        Reseña reseña = new Reseña();
-        reseña.setRestaurante(restaurante);
-//        reseña.setUsuario(usuario);
-        reseña.setComentario(comentario);
-        reseña.setValoracion(valoracion);
+        // Guardar la reseña
         reseñaService.save(reseña);
 
-        // Redirigir al detalle del restaurante
-        return "redirect:/info/" + idRestaurante;
+        // Redirigir a la página de inicio o al restaurante
+        return "redirect:/restaurantes/info/"+ idRestaurante; // O puedes redirigir al detalle del restaurante
     }
 }

@@ -58,10 +58,11 @@ public class RestauranteServiceImpl implements RestauranteService {
         return restauranteDao.findByDescripcionContainingOrNombreContaining(item, item2);
     }
     
-    @Override
+     @Override
     public Restaurante obtenerRestaurantePorId(long idRestaurante) {
         return restauranteDao.findById(idRestaurante).orElse(null);
     }
+   
     
     
 }

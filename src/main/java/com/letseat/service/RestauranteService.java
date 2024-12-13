@@ -32,4 +32,6 @@ public interface RestauranteService {
     Restaurante obtenerRestaurantePorId(long idRestaurante);
     
     
+    
+    
 }

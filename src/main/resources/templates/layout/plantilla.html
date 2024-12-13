@@ -40,7 +40,7 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="dropdown-item" th:href="@{/usuario/listado}">Lista de usuarios</a></li>
-                                    <li sec:authorize="hasRole('ROLE_USER')"><a class="dropdown-item" href="#">Perfil</a></li>
+                                    <li sec:authorize="hasRole('ROLE_USER')"><a class="dropdown-item" th:href="@{/usuario/modificar/}+${session.idUsuario}">Actualizar Perfil</a></li>
                                     <li><hr class="dropdown-divider"></li>
 
                                     <ul class="navbar-nav" sec:authorize="!isAuthenticated()">

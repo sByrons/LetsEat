@@ -20,8 +20,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
 public class ProjectConfig implements WebMvcConfigurer {
-    
-    
+
     /* Los siguientes métodos son para incorporar el tema de internacionalización en el proyecto */
 
  /* localeResolver se utiliza para crear una sesión de cambio de idioma */
@@ -56,11 +55,6 @@ public class ProjectConfig implements WebMvcConfigurer {
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
-    
-    
-    
-    
-    
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -82,20 +76,20 @@ public class ProjectConfig implements WebMvcConfigurer {
         http
                 .authorizeHttpRequests((request) -> request
                 .requestMatchers("/", "/index", "/errores/**", "/error", "/nosotros",
-                        "/registro/**", "/js/**", "/webjars/**", "restaurantes/info/**"
-                , "reseña/**", "nosotros/**")
+                        "/registro/**", "/js/**", "/webjars/**", "restaurantes/info/**",
+                         "reseña/**", "nosotros/**", "/categoria/lista", "/busqueda/**",
+                        "/restaurantes/lista/**")
                 .permitAll()
                 .requestMatchers(
                         "/categoria/nuevo", "/categoria/guardar",
-                        "/categoria/modifica/**", "/categoria/eliminar/**",
-                        "/usuario/nuevo", "/usuario/guardar",
-                        "/usuario/modificar/**", "/usuario/eliminar/**"
+                        "/categoria/modificar/**", "/categoria/eliminar/**",
+                        "/usuario/nuevo", "/usuario/guardar", "/usuario/eliminar/**",
+                         "/restaurantes/modificar/**", "/restaurantes/eliminar/**"
                 ).hasRole("ADMIN")
                 .requestMatchers(
-                        "/categoria/lista",
-                        "/restaurantes/lista",
-                        "/usuario/listado"
-                ).hasAnyRole("USER")
+                        "/usuario/listado", "/usuario/modificar/**",
+                        "/reseña/guardar/**"
+                ).hasRole("USER")
                 )
                 .formLogin((form) -> form
                 .loginPage("/login").permitAll())

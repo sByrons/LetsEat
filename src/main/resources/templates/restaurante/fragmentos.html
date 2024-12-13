@@ -214,30 +214,43 @@
                     </div>
                 </div>
             </div>
+
+
         </section>
         <section th:fragment="AgregarReseña">
+            <!-- Botón para abrir el modal -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarReseña">
                 Agregar reseña
             </button>
+
+            <!-- Modal para agregar reseña -->
             <div class="modal fade" id="agregarReseña" tabindex="-1" aria-labelledby="agregarReseñaLabel" aria-hidden="true">
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
                         <div class="modal-header bg-warning text-white">
                             <h5 class="modal-title" id="agregarResenaModalLabel">Agregar reseña</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> 
-                        <form th:action="@{/reseña/guardar}" th:object="${reseña}"
-                              method="POST" class="was-validated" enctype="multipart/form-data">
-                            <input type="hidden" name="idRestaurante" th:value="${restaurante.idRestaurante}" />
-                            <input type="hidden" name="idUsuario" value="${usuario.idUsuario}" />
+                        </div>
+                        <!-- Formulario para agregar la reseña -->
+                        <form th:action="@{/reseña/guardar}" th:object="${reseña}" method="POST" class="was-validated">
+
+                            <!-- Campos ocultos para el ID del restaurante y usuario -->
+
+                            <input type="text" name="idUsuario" th:value="${session.idUsuario}" />
+                            <input type="text" name="idRestaurante" th:value="${restaurante.idRestaurante}" />
+
                             <div class="modal-body">
+                                <!-- Campo para el comentario -->
                                 <div class="mb-3">
-                                    <div class="mb-3">
-                                        <label for="comentario">Agrega un comentario</label>
-                                        <input type="text" id="comentario" class="form-control" name="comentario" placeholder="Agrega un comentario" required="true"/>
-                                    </div>
-                                    <label>Valoración:</label>
-                                    <select name="valoracion" required>
+                                    <label for="comentario" class="form-label">Agrega un comentario</label>
+                                    <input type="text" id="comentario" class="form-control" name="comentario" placeholder="Agrega un comentario" required="true"/>
+                                </div>
+
+                                <!-- Campo para la valoración -->
+                                <div class="mb-3">
+                                    <label for="valoracion">Valoración:</label>
+                                    <select name="valoracion" id="valoracion" class="form-select" required>
+                                        <option value="" disabled selected>Selecciona una valoración</option>
                                         <option value="1">1 estrella</option>
                                         <option value="2">2 estrellas</option>
                                         <option value="3">3 estrellas</option>
@@ -245,17 +258,17 @@
                                         <option value="5">5 estrellas</option>
                                     </select>
                                 </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-success" type="submit">Guardar</button>
-                                </div>
+                            </div>
+
+                            <!-- Botón de envío del formulario -->
+                            <div class="modal-footer">
+                                <button class="btn btn-success" type="submit">Guardar</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
         </section>
-
         <section th:fragment="VerReseña"> 
             <div class="container">
                 <div class="row">
@@ -265,7 +278,7 @@
                                 <h4>Lista de reseñas</h4>
                             </div>
                             <!-- Verificamos que la lista no esté vacía -->
-                            <div th:if="${reseñas != null and !reseñas.isEmpty()}">
+                            <div th:if="${reseña != null and !reseña.isEmpty()}">
                                 <table class="table table-striped table-hover">
                                     <thead class="table-dark">
                                         <tr>
@@ -277,44 +290,36 @@
                                     </thead>
                                     <tbody>
                                         <!-- Iteramos sobre cada reseña -->
-                                        <tr th:each="reseña, contador : ${reseñas}">
+                                        <tr th:each="reseña, contador : ${reseña}">
                                             <td th:text="${contador.count}">1</td> <!-- Muestra el contador (número de reseña) -->
                                             <td th:text="${reseña.usuario.nombre}">Nombre del usuario</td> <!-- Usuario nombre -->
                                             <td th:text="${reseña.comentario}">Comentario</td> <!-- Comentario -->
                                             <td th:text="${reseña.valoracion}">Valoración</td> <!-- Valoración -->
 
-                                            <td>
-                                                <!-- Enlace para eliminar reseña -->
-                                                <a th:href="@{/reseña/eliminar/}{${reseña.idReseña}}"
-                                                   class="btn btn-danger">
-                                                    <i class="fas fa-trash"></i> Eliminar
-                                                </a>
-                                                <!-- Enlace para modificar reseña -->
-                                                <a th:href="@{/reseña/modificar/}{${reseña.idReseña}}"
-                                                   class="btn btn-success">
-                                                    <i class="fas fa-pencil"></i> Actualizar
-                                                </a>
-                                            </td>
+                                            <!--                                            <td>
+                                                                                             Enlace para eliminar reseña 
+                                                                                            <a th:href="@{/reseña/eliminar/}{${reseña.idReseña}}"
+                                                                                               class="btn btn-danger" >
+                                                                                                <i class="fas fa-trash"></i> Eliminar
+                                                                                            </a>
+                                                                                             Enlace para modificar reseña 
+                                                                                            <a th:href="@{/reseña/modificar/}{${reseña.idReseña}}"
+                                                                                               class="btn btn-success">
+                                                                                                <i class="fas fa-pencil"></i> Actualizar
+                                                                                            </a>
+                                                                                        </td>-->
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <!-- Si la lista está vacía -->
-                            <div class="text-center p-2" th:if="${reseñas == null or reseñas.isEmpty()}">
+                            <div class="text-center p-2" th:if="${reseña == null or reseña.isEmpty()}">
                                 <span>Lista vacía</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card text-center bg-success text-white mb-3">
-                            <div class="card-body">
-                                <h3>Total</h3>
-                                <h4 class="fs-2"><i class="fas fa-users"></i> [[${totalReseña}]]</h4>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
-            </div>
         </section>
 
     </body>

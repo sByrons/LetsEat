@@ -190,8 +190,8 @@
                     </div>
 
 
-                    <div class="col-md-4 d-grid">
-                        <a th:href="@{/usuario/eliminar/}+${usuario.idUsuario}" class="btn btn-danger">
+                    <div class="col-md-4 d-grid" >
+                        <a th:href="@{/usuario/eliminar/}+${usuario.idUsuario}" class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')">
                             <i class="fa-solid fa-trash-can fa-beat"></i> Eliminar
                         </a>
                     </div>
