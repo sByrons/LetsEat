@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head th:replace="layout/plantilla :: head">
-        
+
         <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
         <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-        <link href="../static/css/estilos.css" rel="stylesheet" type="text/css" />
-        <title>Let's Eat</title>
+            <link href="../static/css/estilos.css" rel="stylesheet" type="text/css" />
+            <title>Let's Eat</title>
     </head>
 
     <body>
@@ -18,7 +18,7 @@
                 <h1 class="display-4" style="color: #ff8000;">Grupo 7 - Desarrollo de Aplicaciones Web y Patrones</h1>
                 <h2 class="text-muted">Bienvenidos a nuestra página de recomendación de restaurantes</h2>
                 <p class="lead">Bienvenido a Let's Eat, tu guía culinaria hacia los mejores restaurantes de la ciudad.</p>
-                <img src="../templates/images/Bienvenida.png" class="img-fluid my-4" alt="Imagen de bienvenida">
+                <img src="https://static.vecteezy.com/system/resources/previews/003/418/690/non_2x/chef-are-calling-customers-into-the-restaurant-welcome-sign-vector.jpg" height="400" alt="Imagen de bienvenida">
             </div>
 
             <!-- Información Principal -->
@@ -86,16 +86,15 @@
             </div>
 
             <!-- Participantes -->
-            <footer class="mt-5">
-                <h5 class="text-center">Participantes:</h5>
-                <ul class="list-unstyled text-center">
-                    <li>CASTILLO ARROYO ALEJANDRO ESTEBAN</li>
-                    <li>SEGURA GRACIAS ANDRES FERNANDO</li>
-                    <li>ALVAREZ RIVAS BYRON ANDRES</li>
-                    <li>SANABRIA HERNANDEZ ANDERSON SEBASTIAN</li>
-                </ul>
-                <footer th:replace="layout/plantilla :: footer"></footer>
-            </footer>
+
+            <h5 class="text-center">Participantes:</h5>
+            <ul class="list-unstyled text-center">
+                <li>CASTILLO ARROYO ALEJANDRO ESTEBAN</li>
+                <li>SEGURA GRACIAS ANDRES FERNANDO</li>
+                <li>ALVAREZ RIVAS BYRON ANDRES</li>
+                <li>SANABRIA HERNANDEZ ANDERSON SEBASTIAN</li>
+            </ul>
         </div>
+        <footer th:replace="layout/plantilla :: footer"></footer>
     </body>
 </html>
