@@ -10,36 +10,37 @@
     <body>
 
         <!--FRAGMENTO QUE SE USA PARA MOSTRAR UN LISTADO DE CATEGORIAS-->
-        <section th:fragment="listaCategoria" id="categoria">
-            <div class="text-center p-2" th:if="${categorias != null}">
-                <div class="container">
-                    <!-- Fila de tarjetas -->
-                    <div class="row" >
-                        <div th:each="categoria, contador : ${categorias}" class="col-md-4 mb-4">
-                            <!-- Tarjeta -->
-                            <div class="card"  style="width: 20rem;">
-                                <img class="card-img-top" th:src="${categoria.rutaImagen}" alt="Card image cap" height="200">
-                                    <div class="card-body">
-                                        <h5 class="card-title" th:text="${categoria.tipo}"></h5>
-                                        <p class="card-text" th:text="${categoria.descripcion}"></p>
-                                        <a th:href="@{/restaurantes/lista/}+${categoria.idCategoria}" class="btn btn-primary">
-                                            <i class="fa-solid fa-eye fa-fade"></i>Ver</a>
-                                        <a th:href="@{/categoria/modificar/}+${categoria.idCategoria}"
-                                           class="btn btn-warning" sec:authorize="hasRole('ROLE_ADMIN')">
-                                            <i class="fa-solid fa-pen-to-square fa-bounce"></i>Modificar</a>
-
-                                        <a th:href="@{/categoria/eliminar/}+${categoria.idCategoria}"
-                                           class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')">
-                                            <i class="fa-solid fa-trash-can fa-beat"></i> Borrar</a>
-
-                                    </div>
-                            </div>
-
+   <section th:fragment="listaCategoria" id="categoria">
+    <div class="text-center p-2" th:if="${categorias != null}">
+        <div class="container">
+            <!-- Fila de tarjetas -->
+            <div class="row">
+                <div th:each="categoria, contador : ${categorias}" class="col-md-4 mb-4">
+                    <!-- Tarjeta -->
+                    <div class="card" style="width: 20rem; border: 2px solid #ff8000;">
+                        <img class="card-img-top" th:src="${categoria.rutaImagen}" alt="Card image cap" height="200"></img>
+                        <div class="card-body">
+                            <h5 class="card-title" style="color: #ff8000;" th:text="${categoria.tipo}"></h5>
+                            <p class="card-text" th:text="${categoria.descripcion}"></p>
+                            <a th:href="@{/restaurantes/lista/}+${categoria.idCategoria}" class="btn" style="background-color: #ff8000; color: white;">
+                                <i class="fa-solid fa-eye fa-fade"></i> Ver
+                            </a>
+                            <a th:href="@{/categoria/modificar/}+${categoria.idCategoria}"
+                               class="btn" style="background-color: #ff9933; color: white;" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <i class="fa-solid fa-pen-to-square fa-bounce"></i> Modificar
+                            </a>
+                            <a th:href="@{/categoria/eliminar/}+${categoria.idCategoria}"
+                               class="btn" style="background-color: #ff6600; color: white;" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <i class="fa-solid fa-trash-can fa-beat"></i> Borrar
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+
 
         <!--FRAGMENTO QUE SE USA PARA COLOCAR UN BOTON PARA  AGREGAR UNA CATEGORIA-->
         <section th:fragment="botonAgregar" class="py-2 mb-2 bg-white">

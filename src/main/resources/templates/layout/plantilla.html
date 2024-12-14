@@ -70,8 +70,8 @@
 
                         </ul>
                         <form method="POST" th:action="@{/busqueda/consulta}" class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Buscar" th:value="${item}" th:name="item" required="true"/>
-                            <button class="btn btn-dark"  type="submit">Buscar</button>
+                            <input class="form-control me-2" type="search" placeholder="Buscar" th:value="${item}" th:name="item" required="true"sec:authorize="isAuthenticated()"/>
+                            <button class="btn btn-dark"  type="submit"sec:authorize="isAuthenticated()">Buscar</button>
                         </form>
                     </div>
                 </div>

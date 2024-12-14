@@ -8,44 +8,50 @@
     <body>
 
         <!--FRAGMENTO QUE SE USA PARA MOSTRAR UN LISTADO DE RESTAURANTES-->
-        <section th:fragment="listaUsuario" id="usuario">
-            <div class="text-center p-2" th:if="${usuarios != null}">
-                <div class="container">
-                    <!-- Fila de tarjetas -->
-                    <div class="row" >
-                        <div th:each="usuario, contador : ${usuarios}" class="col-md-4 mb-4">
-                            <!-- Tarjeta -->
-                            <div class="card"  style="width: 20rem;">
-                                <img class="card-img-top" th:src="${usuario.rutaImagen}" alt="Card image cap" height="200">
-                                    <div class="card-body">
-                                        <h5 class="card-title" th:text="${usuario.username}"></h5>
-                                        <p class="card-text" th:text="${usuario.nombre}"></p>
-                                        <a th:href="@{/usuario/modificar/}+${usuario.idUsuario}"
-                                           class="btn btn-warning" sec:authorize="hasRole('ROLE_ADMIN')">
-                                            <i class="fa-solid fa-pen-to-square fa-bounce"></i>Modificar</a>
-
-                                        <a th:href="@{/usuarios/eliminar/}+${usuario.idUsuario}"
-                                           class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')">
-                                            <i class="fa-solid fa-trash-can fa-beat"></i> Borrar</a>
-
-                                    </div>
-                            </div>
-
+  <section th:fragment="listaUsuario" id="usuario">
+    <div class="text-center p-2" th:if="${usuarios != null}">
+        <div class="container">
+            <!-- Fila de tarjetas -->
+            <div class="row">
+                <div th:each="usuario, contador : ${usuarios}" class="col-md-4 mb-4">
+                    <!-- Tarjeta -->
+                    <div class="card" style="width: 20rem; border-radius: 15px; overflow: hidden; box-shadow: 0px 4px 6px rgba(0,0,0,0.2);">
+                        <!-- Contenedor de imagen -->
+                        <div style="position: relative; overflow: hidden; height: 200px; background-color: #f8f9fa; display: flex; align-items: center; justify-content: center; border-bottom: 5px solid #ff8000;">
+                            <img class="card-img-top" th:src="${usuario.rutaImagen}" alt="Card image cap" 
+                                 style="max-height: 100%; max-width: 100%; object-fit: contain;"></img>
+                        </div>
+                        <div class="card-body" style="background-color: #fff7f0; text-align: center;">
+                            <h5 class="card-title" th:text="${usuario.username}" style="color: #ff8000;"></h5>
+                            <p class="card-text" th:text="${usuario.nombre}" style="color: #333;"></p>
+                            <a th:href="@{/usuario/modificar/}+${usuario.idUsuario}" 
+                               class="btn btn-warning" style="margin-right: 5px; border-radius: 10px;"
+                               sec:authorize="hasRole('ROLE_ADMIN')">
+                                <i class="fa-solid fa-pen-to-square fa-bounce"></i> Modificar
+                            </a>
+                            <a th:href="@{/usuarios/eliminar/}+${usuario.idUsuario}" 
+                               class="btn btn-danger" style="border-radius: 10px;" 
+                               sec:authorize="hasRole('ROLE_ADMIN')">
+                                <i class="fa-solid fa-trash-can fa-beat"></i> Borrar
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <!--FRAGMENTO QUE SE USA PARA COLOCAR UN BOTON PARA  AGREGAR UN RESTAURANTE-->
+        <!--FRAGMENTO QUE SE USA PARA COLOCAR UN BOTON PARA  AGREGAR UN USUARIO-->
         <section th:fragment="botonAgregar" class="py-2 mb-2 bg-white">
             <div class="container" sec:authorize="hasRole('ROLE_ADMIN')">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <div class="row">
                         <div class="col-md-12">   
                             <button 
+                                style="background-color:#ff8000"
                                 type="button" 
-                                class="btn btn-warning btn-block" 
+                                class="btn  btn-block" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#agregarUsuario">
                                 Agregar usuario
@@ -56,127 +62,130 @@
             </div>
         </section>
 
-        <!--FRAGMENTO QUE SE USA PARA AGREGAR UN RESTAURANTE-->
-        <section th:fragment="agregarUsuario">
-            <div id="agregarUsuario" 
-                 class="modal fade" 
-                 tabindex="-1" 
-                 aria-labelledby="exampleModalLabel" 
-                 aria-hidden="true">
-                <div class="modal-dialog modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header bg-warning text-white">
-                            <h5 class="modal-title">Agregar usuario</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> 
-                        <form th:action="@{/usuario/guardar}" th:object="${usuario}"
-                              method="POST" class="was-validated" enctype="multipart/form-data">
-                            <div class="modal-body">
-
-                                <div class="mb-3">
-                                    <label for="username">Username</label>
-                                    <input type="text" class="form-control" name="username" required="true"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password">Contraseña</label>
-                                    <input type="password" class="form-control" name="password" required="true"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="nombre">Nombre</label>
-                                    <input type="text" class="form-control" name="nombre" required="true"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="apellidos">Apellidos</label>
-                                    <input type="text" class="form-control" name="apellidos" required="true"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email">Correo</label>
-                                    <input type="email" class="form-control" name="correo" required="true"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="telefono">Telefono</label>
-                                    <input type="tel" class="form-control" name="telefono" required="true"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="imagen">Imagen</label>
-                                    <input class="form-control" type="file" name="imagenFile" onchange="readURL(this);"/>
-                                    <img id="blah" src="#" alt="your image" height="200"/>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-success" type="submit">Guardar</button>
-                            </div>
-                        </form>
-                    </div>
+        <!--FRAGMENTO QUE SE USA PARA AGREGAR UN USUARIO-->
+       <section th:fragment="agregarUsuario">
+    <div id="agregarUsuario" 
+         class="modal fade" 
+         tabindex="-1" 
+         aria-labelledby="exampleModalLabel" 
+         aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content" style="border-radius: 15px; overflow: hidden; box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);">
+                <div class="modal-header" style="background-color: #ff8000; color: white; border-bottom: 3px solid #e67e22;">
+                    <h5 class="modal-title">Agregar usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background: white;"><i class="fa-solid fa-x"></i></button>
                 </div>
+                <form th:action="@{/usuario/guardar}" th:object="${usuario}" 
+                      method="POST" class="was-validated" enctype="multipart/form-data">
+                    <div class="modal-body" style="background-color: #fff7f0;">
+                        <div class="mb-3">
+                            <label for="username" style="font-weight: bold;">Username</label>
+                            <input type="text" class="form-control" name="username"  
+                                   style="border-radius: 10px; border: 1px solid #ddd;"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" style="font-weight: bold;">Contraseña</label>
+                            <input type="password" class="form-control" name="password"  
+                                   style="border-radius: 10px; border: 1px solid #ddd;"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nombre" style="font-weight: bold;">Nombre</label>
+                            <input type="text" class="form-control" name="nombre"  
+                                   style="border-radius: 10px; border: 1px solid #ddd;"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellidos" style="font-weight: bold;">Apellidos</label>
+                            <input type="text" class="form-control" name="apellidos"  
+                                   style="border-radius: 10px; border: 1px solid #ddd;"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" style="font-weight: bold;">Correo</label>
+                            <input type="email" class="form-control" name="correo"  
+                                   style="border-radius: 10px; border: 1px solid #ddd;"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono" style="font-weight: bold;">Teléfono</label>
+                            <input type="tel" class="form-control" name="telefono"  
+                                   style="border-radius: 10px; border: 1px solid #ddd;"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="imagen" style="font-weight: bold;">Imagen</label>
+                            <input class="form-control" type="file" name="imagenFile" onchange="readURL(this);" 
+                                   style="border-radius: 10px; border: 1px solid #ddd;"></input>
+                            <div class="text-center mt-3">
+                                <img id="blah" src="#" alt="Vista previa de imagen" height="200" style="max-width: 100%; border-radius: 10px; border: 1px solid #ddd;">
+                                </img>   </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="background-color: #fff7f0; border-top: 3px solid #e67e22;">
+                        <button class="btn btn-success" type="submit" style="border-radius: 10px;">Guardar</button>
+                    </div>
+                </form>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+        
 
 
         <!--  Fragmento que se utiliza en la página modifca.html -->
-        <section th:fragment="editarUsuario">
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-12">
-                    <form method="POST"
-                          th:action="@{/usuarios/guardar}" 
-                          th:object="${usuario}"
-                          class="was-validated"                          
-                          enctype="multipart/form-data">
-                        <input type="hidden" name="idUsuario" th:field="*{idUsuario}"/>
-                        <input type="hidden" name="rutaImagen" th:field="*{rutaImagen}"/> <div id=details>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h4>Actualizar</h4>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="mb-3">
-                                                   
-                                                <div class="mb-3">
-                                                    <label for="nombre">Nombre</label>
-                                                    <input type="text" class="form-control" 
-                                                           name="nombre" th:field="*{nombre}"
-                                                           required="true">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="apellidos">Apellidos</label>
-                                                    <input type="text" class="form-control" 
-                                                           name="apellidos" th:field="*{apellidos}"
-                                                           required="true">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="correo">Correo</label>
-                                                    <input type="text" class="form-control" 
-                                                           name="correo" th:field="*{correo}"
-                                                           required="true">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="telefono">Telefono</label>
-                                                    <input type="text" class="form-control" 
-                                                           name="telefono" th:field="*{telefono}"
-                                                           required="true">
-                                                </div>
-                                                
-                                                <div class="mb-3">
-                                                    <label for="imagen">Imagen</label>
-                                                    <input class="form-control" type="file" name="imagenFile"
-                                                           onchange="readURL(this);" />
-                                                    <img id="blah" th:src="@{${usuario.rutaImagen}}" alt="your image" height="200"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <section th:replace="~{usuario/fragmentos :: botonesEditar}"/>
-                    </form>
+<section th:fragment="editarUsuario">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form method="POST"
+                  th:action="@{/usuarios/guardar}" 
+                  th:object="${usuario}"
+                  class="was-validated"
+                  enctype="multipart/form-data"
+                  style="box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3); border-radius: 15px; overflow: hidden; background-color: #fff7f0;">
+                <input type="hidden" name="idUsuario" th:field="*{idUsuario}" />
+                <input type="hidden" name="rutaImagen" th:field="*{rutaImagen}" />
+                
+                <div class="card">
+                    <div class="card-header" style="background-color: #ff8000; color: white; border-bottom: 3px solid #e67e22;">
+                        <h4 class="text-center">Actualizar Usuario</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="nombre" style="font-weight: bold;">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" th:field="*{nombre}" 
+                                    style="border-radius: 10px; border: 1px solid #ddd;"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellidos" style="font-weight: bold;">Apellidos</label>
+                            <input type="text" class="form-control" name="apellidos" th:field="*{apellidos}" 
+                                    style="border-radius: 10px; border: 1px solid #ddd;"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="correo" style="font-weight: bold;">Correo</label>
+                            <input type="text" class="form-control" name="correo" th:field="*{correo}" 
+                                    style="border-radius: 10px; border: 1px solid #ddd;"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono" style="font-weight: bold;">Teléfono</label>
+                            <input type="text" class="form-control" name="telefono" th:field="*{telefono}" 
+                                    style="border-radius: 10px; border: 1px solid #ddd;">
+                      </input>  </div>
+                        <div class="mb-3">
+                            <label for="imagen" style="font-weight: bold;">Imagen</label>
+                            <input class="form-control" type="file" name="imagenFile" 
+                                   onchange="readURL(this);" style="border-radius: 10px; border: 1px solid #ddd;"></input>
+                            <div class="text-center mt-3">
+                                <img id="blah" th:src="@{${usuario.rutaImagen}}" 
+                                     alt="Vista previa de imagen" height="200" 
+                                     style="max-width: 100%; border-radius: 10px; border: 1px solid #ddd;">
+                                </img> </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center" style="background-color: #fff7f0; border-top: 3px solid #e67e22;">
+                        <section th:replace="~{usuario/fragmentos :: botonesEditar}"></section>
+                    </div>
                 </div>
-            </div>
+            </form>
+        </div>
+    </div>
+</section>
 
-        </section>
 
         <!--  Fragmento que se utiliza en el fragmento anterior -->
         <section th:fragment="botonesEditar">
