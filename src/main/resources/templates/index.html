@@ -1,96 +1,101 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
     <head th:replace="layout/plantilla :: head">
-        <link href="../static/css/estilos.css" rel="stylesheet" type="text/css"/>
+        
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <link href="../static/css/estilos.css" rel="stylesheet" type="text/css" />
+        <title>Let's Eat</title>
     </head>
+
     <body>
         <header th:replace="layout/plantilla :: header"></header>
-        <h1>Grupo 7 - Desarrollo de Aplicaciones Web y Patrones</h1>
-        <h2>Bienvenidos a nuestra página de recomendación de restaurantes</h2>
-        <p>Bienvenido a Let's Eat, tu guía culinaria hacia los mejores restaurantes de la ciudad.</p>
 
-        <br />
-        <img src="../templates/images/Bienvenida.png"/>
+        <div class="container mt-4">
+            <!-- Título Principal -->
+            <div class="text-center mb-5">
+                <h1 class="display-4" style="color: #ff8000;">Grupo 7 - Desarrollo de Aplicaciones Web y Patrones</h1>
+                <h2 class="text-muted">Bienvenidos a nuestra página de recomendación de restaurantes</h2>
+                <p class="lead">Bienvenido a Let's Eat, tu guía culinaria hacia los mejores restaurantes de la ciudad.</p>
+                <img src="../templates/images/Bienvenida.png" class="img-fluid my-4" alt="Imagen de bienvenida">
+            </div>
 
-        <br />
-        <p>En nuestro sitio web, encontrarás una amplia selección de restaurantes, clasificados por tipo de cocina, precio y ubicación. Cada restaurante está acompañado de una descripción detallada, fotos del lugar y reseñas de otros comensales, para que puedas tomar una decisión informada antes de hacer tu reserva.</p>
-        <br />
-        <p>Diferentes opciones podra encontrar como por ejemplo:</p>
-        <ul>
-            <li>Familiar</li>
-            <li>Gourmet</li>
-            <li>Temático</li>
-            <li>Entre otros</li>
-        </ul>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-       <div class="container my-5">
-    <!-- Título Principal -->
-    <div class="text-center mb-4">
-        <h1 id="tituloPrincipal" style="color: #ff8000;">Bienvenidos</h1>
-    </div>
+            <!-- Información Principal -->
+            <div class="row mb-5">
+                <div class="col-md-8 offset-md-2">
+                    <p class="text-justify">En nuestro sitio web, encontrarás una amplia selección de restaurantes, clasificados por tipo de cocina, precio y ubicación. Cada restaurante está acompañado de una descripción detallada, fotos del lugar y reseñas de otros comensales, para que puedas tomar una decisión informada antes de hacer tu reserva.</p>
+                    <p>Diferentes opciones podrá encontrar, como por ejemplo:</p>
+                    <ul class="list-group">
+                        <li class="list-group-item">Familiar</li>
+                        <li class="list-group-item">Gourmet</li>
+                        <li class="list-group-item">Temático</li>
+                        <li class="list-group-item">Entre otros</li>
+                    </ul>
+                </div>
+            </div>
 
-    <div class="card mb-4">
-        <div class="card-header" style="background-color: #ff8000; color: white;">
-            1- Restaurante
+            <!-- Cards de Restaurantes -->
+            <div class="row">
+                <!-- Restaurante 1 -->
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-header text-white" style="background-color: #ff8000;">
+                            Restaurante 1 - Per Se
+                        </div>
+                        <div class="card-body">
+                            <p>Per Se ofrece una amplia variedad de platos de marisco y carne, todos ellos elaborados con productos frescos de la zona.</p>
+                            <div class="text-center">
+                                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/d8/b6/eb/restaurante-el-patio.jpg?w=600&h=-1&s=1" class="img-fluid rounded" alt="Imagen del restaurante">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Restaurante 2 -->
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-header text-white" style="background-color: #ff8000;">
+                            Restaurante 2 - La Cafetería Trecaffè
+                        </div>
+                        <div class="card-body">
+                            <p>La Cafetería Trecaffè - Via dei due Macelli es el lugar ideal para los amantes de la lectura. Además de una excelente selección de cafés y tés, ofrecen una amplia variedad de libros y revistas.</p>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1822205.7676270963!2d10.919467134511377!3d42.32460744660981!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61ab5cfaaed3%3A0xf4da7256fe11f8a!2sTrecaff%C3%A8%20-%20Via%20dei%20due%20Macelli!5e0!3m2!1ses-419!2scr!4v1731114649161!5m2!1ses-419!2scr" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Restaurante 3 -->
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-header text-white" style="background-color: #ff8000;">
+                            Restaurante 3 - El invernadero food truck
+                        </div>
+                        <div class="card-body">
+                            <p>El invernadero food truck está causando furor con sus hamburguesas gourmet y sus patatas fritas caseras.</p>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d615503.4066796917!2d-84.55525594505708!3d10.063007289106446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e33416803d9b%3A0x924ff33e11d7591d!2sEl%20invernadero%20food%20truck!5e0!3m2!1ses-419!2scr!4v1731114733397!5m2!1ses-419!2scr" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Correo de Contacto -->
+            <div class="text-center my-5">
+                <p>Si requiere solicitar información sobre recomendaciones puede escribirnos en el siguiente correo:</p>
+                <a href="mailto:recomendaciones@LetsEat.ac.cr?cc=soporte@LetsEat.ac.cr&subject=Recomendaci%C3%B3n%20de%20restaurantes&body=Estimado%2Fa%20LetsEat%2C%20%0A%0ANos%20gustar%C3%ADa%20conocer%20algunas%20recomendaciones%20de%20restaurantes%20locales%20donde%20podamos%20disfrutar%20de%20la%20gastronom%C3%ADa%20de%20la%20regi%C3%B3n.%0A%0AAgradecer%C3%ADa%20que%20me%20proporcionaran%20una%20lista%20de%20opciones%20que%20se%20ajusten%20a%20nuestro%20presupuesto%20y%20preferencias.%20%0AQuedo%20a%20la%20espera%20de%20su%20respuesta.%20%0A%0AAtentamente%2C%20%0AGrupo%207%0Agrupo7%40desarrolloapliacioneswebpatrones.ac.cr%20%0A" class="btn btn-primary">Enviar correo a LET'S EAT</a>
+            </div>
+
+            <!-- Participantes -->
+            <footer class="mt-5">
+                <h5 class="text-center">Participantes:</h5>
+                <ul class="list-unstyled text-center">
+                    <li>CASTILLO ARROYO ALEJANDRO ESTEBAN</li>
+                    <li>SEGURA GRACIAS ANDRES FERNANDO</li>
+                    <li>ALVAREZ RIVAS BYRON ANDRES</li>
+                    <li>SANABRIA HERNANDEZ ANDERSON SEBASTIAN</li>
+                </ul>
+                <footer th:replace="layout/plantilla :: footer"></footer>
+            </footer>
         </div>
-        <div class="card-body card-body-custom">
-            <p class="mb-0">
-                Per Se ofrece una amplia variedad de platos de marisco y carne, todos ellos elaborados con productos frescos de la zona.</p>
-                <div>Ubicación: </div>
-                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/d8/b6/eb/restaurante-el-patio.jpg?w=600&h=-1&s=1" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-            </p>
-        </div>
-    </div>
-
-    <div class="card mb-4">
-        <div class="card-header" style="background-color: #ff8000; color: white;">
-            2- Restaurante
-        </div>
-        <div class="card-body card-body-custom">
-            <p class="mb-0">
-                La Cafetería Trecaffè - Via dei due Macelli es el lugar ideal para los amantes de la lectura. Además de una excelente selección de cafés y tés, ofrecen una amplia variedad de libros y revistas.
-            </p>
-            <div>Ubicación: </div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1822205.7676270963!2d10.919467134511377!3d42.32460744660981!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61ab5cfaaed3%3A0xf4da7256fe11f8a!2sTrecaff%C3%A8%20-%20Via%20dei%20due%20Macelli!5e0!3m2!1ses-419!2scr!4v1731114649161!5m2!1ses-419!2scr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-    </div>
-
-    <div class="card mb-4">
-        <div class="card-header" style="background-color: #ff8000; color: white;">
-            3- Restaurante
-        </div>
-        <div class="card-body card-body-custom">
-            <p class="mb-0">
-                El invernadero food truck está causando furor con sus hamburguesas gourmet y sus patatas fritas caseras.
-            </p>
-            <div>Ubicación: </div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d615503.4066796917!2d-84.55525594505708!3d10.063007289106446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e33416803d9b%3A0x924ff33e11d7591d!2sEl%20invernadero%20food%20truck!5e0!3m2!1ses-419!2scr!4v1731114733397!5m2!1ses-419!2scr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-    </div>
-
-    <p> Si requiere solicitar información sobre recomendaciones puede escribirnos en el siguiente correo: </p>
-    <a href="mailto:recomendaciones@LetsEat.ac.cr?cc=soporte@LetsEat.ac.cr&subject=Recomendaci%C3%B3n%20de%20restaurantes&body=Estimado%2Fa%20LetsEat%2C%20%0A%0ANos%20gustar%C3%ADa%20conocer%20algunas%20recomendaciones%20de%20restaurantes%20locales%20donde%20podamos%20disfrutar%20de%20la%20gastronom%C3%ADa%20de%20la%20regi%C3%B3n.%0A%0AAgradecer%C3%ADa%20que%20me%20proporcionaran%20una%20lista%20de%20opciones%20que%20se%20ajusten%20a%20nuestro%20presupuesto%20y%20preferencias.%20%0AQuedo%20a%20la%20espera%20de%20su%20respuesta.%20%0A%0AAtentamente%2C%20%0AGrupo%20%0Agrupo7%40desarrolloapliacioneswebpatrones.ac.cr%20%0A"> 
-        Enviar correo al LET´S EAT
-    </a>
-</div>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <p>Participantes:</p>
-        <li>CASTILLO ARROYO ALEJANDRO ESTEBAN</li>
-        <li>SEGURA GRACIAS ANDRES FERNANDO</li>
-        <li>ALVAREZ RIVAS BYRON ANDRES</li>
-        <li>SANABRIA HERNANDEZ ANDERSON SEBASTIAN</li>
-        <footer th:replace="layout/plantilla :: footer"></footer>
     </body>
 </html>
